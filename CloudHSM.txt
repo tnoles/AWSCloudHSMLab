@@ -27,3 +27,9 @@ openssl x509 -req -days 365 -in <cluster ID>_ClusterCsr.csr \
                               -CAkey customerCA.key \
                               -CAcreateserial \
                               -out <cluster ID>_CustomerHsmCertificate.crt
+
+*********************************************************************************************************************
+
+wget https://s3.amazonaws.com/cloudhsmv2-software/cloudhsm-client-latest.x86_64.rpm
+sudo yum install -y ./cloudhsm-client-latest.x86_64.rpm
+sudo /opt/cloudhsm/bin/configure -a <IP address>
