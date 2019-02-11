@@ -15,3 +15,15 @@ openssl x509 -in <cluster ID>_HsmCertificate.crt -pubkey -noout > <cluster ID>_H
 openssl req -in <cluster ID>_ClusterCsr.csr -pubkey -noout > <cluster ID>_ClusterCsr.pub
 
 diff <cluster ID>_HsmCertificate.pub <cluster ID>_ClusterCsr.pub
+
+
+******************************************************************************************************
+openssl genrsa -aes256 -out customerCA.key 2048
+
+openssl req -new -x509 -days 365 -key customerCA.key -out customerCA.crt
+
+openssl x509 -req -days 365 -in <cluster ID>_ClusterCsr.csr \
+                              -CA customerCA.crt \
+                              -CAkey customerCA.key \
+                              -CAcreateserial \
+                              -out <cluster ID>_CustomerHsmCertificate.crt
