@@ -36,3 +36,9 @@ sudo /opt/cloudhsm/bin/configure -a <IP address>
 ***************************************************************************************************************
 /opt/cloudhsm/bin/cloudhsm_mgmt_util /opt/cloudhsm/etc/cloudhsm_mgmt_util.cfg
 *****************************************************************************************************************
+genRSAKeyPair -m 2048 -e 65537 -l rsa2048
+genSymKey -t 31 -s 16 -sess -l export-wrapping-key
+wrapKey -k <key to be wrapped> -w <wrapping key> -out mywrappingkey
+exportPrivateKey -k <private key> -out myprivatekey -w <wrapping key>
+exportPubKey -k <public key> -out rsa2048.pub.exp
+****************************************************************************************************************
