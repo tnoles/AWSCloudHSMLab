@@ -33,3 +33,6 @@ openssl x509 -req -days 365 -in <cluster ID>_ClusterCsr.csr \
 wget https://s3.amazonaws.com/cloudhsmv2-software/cloudhsm-client-latest.x86_64.rpm
 sudo yum install -y ./cloudhsm-client-latest.x86_64.rpm
 sudo /opt/cloudhsm/bin/configure -a <IP address>
+***************************************************************************************************************
+/opt/cloudhsm/bin/cloudhsm_mgmt_util /opt/cloudhsm/etc/cloudhsm_mgmt_util.cfg
+*****************************************************************************************************************
