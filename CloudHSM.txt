@@ -1,0 +1,17 @@
+cat  <cluster ID>_AwsHardwareCertificate.crt \
+      AWS_CloudHSM_Root-G1.crt \
+      >  <cluster ID>_AWS_chain.crt
+      
+openssl verify -CAfile <cluster ID>_AWS_chain.crt <cluster ID>_HsmCertificate.crt
+
+cat <cluster ID>_ManufacturerHardwareCertificate.crt \
+      cavium_cert.crt \
+      >  <cluster ID>_manufacturer_chain.crt
+
+openssl verify -CAfile <cluster ID>_manufacturer_chain.crt <cluster ID>_HsmCertificate.crt
+
+openssl x509 -in <cluster ID>_HsmCertificate.crt -pubkey -noout > <cluster ID>_HsmCertificate.pub
+
+openssl req -in <cluster ID>_ClusterCsr.csr -pubkey -noout > <cluster ID>_ClusterCsr.pub
+
+diff <cluster ID>_HsmCertificate.pub <cluster ID>_ClusterCsr.pub
